@@ -1,7 +1,8 @@
 var app = angular.module('app', ['ngRoute'])
     .config(["$routeProvider", function ($routeProvider) {
         return $routeProvider.when("/", {
-            templateUrl: "/views/index"
+            redirectTo: "/list"
+            //templateUrl: "/views/index"
         }).when("/list", {
             templateUrl: "views/fieldsList",
             controller: "FieldsListController"
@@ -12,7 +13,7 @@ var app = angular.module('app', ['ngRoute'])
             templateUrl: "/views/fieldEdit",
             controller: "FieldEditController"
         }).otherwise({
-            redirectTo: "/"
+            redirectTo: "/list"
         });
     }
     ]).config([
