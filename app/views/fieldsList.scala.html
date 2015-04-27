@@ -1,0 +1,47 @@
+@()
+
+@template() {
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default" data-ng-click="addField()">+ Add Field</button>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+
+                <thead>
+                    <tr class="active">
+                        <td>Label</td>
+                        <td>Type</td>
+                        <td>Required</td>
+                        <td>Is Active</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="field in fields">
+                        <td>{{field.label}}</td>
+                        <td>{{field.type}}</td>
+                        <td>
+                            <input type="checkbox" data-ng-model="field.required" data-ng-true-value="true" data-ng-false-value="false" class="disabled">
+                        </td>
+                        <td>
+                            <input type="checkbox" data-ng-model="field.isActive" data-ng-true-value="true" data-ng-false-value="false" class="disabled">
+                        </td>
+                        <td>
+                            @*<a class="btn btn-default" href="/field/{{field.id}}">Edit</a>*@
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary center-block" data-ng-click="delField(field)">
+                                Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

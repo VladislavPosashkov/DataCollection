@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Edit Field</h2>
+    </div>
+</div>
+<div class="row">
+        <!--left coll !-->
+    <div class="col-md-5">
+        <div class="form-group">
+            <label for="labelInput">Label*:</label>
+            <input type="text" class="form-control" id="labelInput" data-ng-model="item.label">
+        </div>
+        <div class="form-group">
+            <label for="typeSelects">Type*:</label>
+            <select class="form-control" id="typeSelects" data-ng-model="item.type" data-ng-options="type as type for type in types">
+                </select>
+        </div>
+        <div class="form-group" data-ng-hide="item.type == 'textarea' || item.type == 'date' || item.type == 'singleLineText'">
+            <label for="optionsInput">Options*:</label>
+            <textarea class="form-control" id="optionsInput" rows="3" data-ng-model="item[5].value" ng-list="&#10;" ng-trim="false" t></textarea>
+        </div>
+        <button type="button" class="btn btn-default" data-ng-click="save()" href="#/list">Save</button>
+        <button type="button" class="btn btn-default" href="#/list">Cancel</button>
+
+    </div>
+        <!--right col !-->
+    <div class="col-md-5 col-md-offset-1">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" data-ng-model="item.required" data-ng-true-value="true" data-ng-false-value="false" value="required">
+                    Required
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" data-ng-model="item.isActive" data-ng-true-value="true" data-ng-false-value="false" value="isActive">
+                    Is Active
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>
