@@ -16,6 +16,8 @@ var app = angular.module('app', ['ngRoute', 'ngWebsocket'])
         }).when("/field/:id", {
             templateUrl: "/views/fieldEdit",
             controller: "FieldEditController"
+        }).when("/success",{
+            templateUrl: "/views/success"
         }).otherwise({
             redirectTo: "/"
         });
@@ -152,6 +154,7 @@ app.controller("ResponsesCollectionController", ["$scope", "$location", "$http",
 
     $scope.submit = function () {
         $http.post('/api/v1/form', $scope.form);
+        $location.path('/success');
     };
 
     $scope.reset = function () {
