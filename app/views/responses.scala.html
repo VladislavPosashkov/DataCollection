@@ -1,0 +1,24 @@
+@()
+    @adminTemplate() {
+        <h1>Responses</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="column in columns">
+                                {{column.label}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="form in formData">
+                            <td ng-repeat="column in columns">
+                                {{getColumnValue(form.responses, column.id)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }

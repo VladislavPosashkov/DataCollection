@@ -1,0 +1,26 @@
+@()(content: Html)
+
+<nav class="navbar navbar-default" data-ng-controller="AdminHeaderController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Data Collection</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/fields">Fields</a></li>
+                <li><a href="/responses">Responses ({{count}})</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    @content
+</div>

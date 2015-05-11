@@ -3,26 +3,44 @@
 # ~~~~
 
 
-GET           /                        controllers.Application.main(any = "none")
+GET           /                            controllers.Application.main(any = "none")
 
 # Routing for angular view
-GET           /views/index             controllers.Application.index()
-GET           /views/fieldsList        controllers.Application.fieldsList()
-GET           /views/fieldEdit         controllers.Application.fieldEdit()
-GET           /views/fieldCreate       controllers.Application.fieldCreate()
+
+GET           /views/responseCreate        controllers.Application.responseCreate()
+GET           /views/responses             controllers.Application.responses()
+
+GET           /views/fieldsList            controllers.Application.fieldsList()
+GET           /views/fieldEdit             controllers.Application.fieldEdit()
+GET           /views/fieldCreate           controllers.Application.fieldCreate()
+
+
+
+
+GET           /responseWS                  controllers.Application.responseWS()
+GET           /headerWS                    controllers.Application.headerWS()
 
 # RESTFUll API
 
-GET           /api/v1/field            controllers.DataCollectionAPI.getAllFields()
-GET           /api/v1/field/:id        controllers.DataCollectionAPI.getFieldWithId(id: Integer)
-DELETE        /api/v1/field/:id        controllers.DataCollectionAPI.deleteField(id: Integer)
-POST          /api/v1/field            controllers.DataCollectionAPI.saveField()
-PUT           /api/v1/field/:id        controllers.DataCollectionAPI.updateField(id: Integer)
+GET           /api/v1/field/short          controllers.DataCollectionAPI.getShortFields()
+
+GET           /api/v1/field                controllers.DataCollectionAPI.getFields()
+GET           /api/v1/field/:id            controllers.DataCollectionAPI.getField(id: Integer)
+POST          /api/v1/field                controllers.DataCollectionAPI.createField()
+PUT           /api/v1/field/:id            controllers.DataCollectionAPI.updateField(id: Integer)
+DELETE        /api/v1/field/:id            controllers.DataCollectionAPI.deleteField(id: Integer)
+
+GET           /api/v1/form/:id             controllers.DataCollectionAPI.getForm(id: Integer)
+GET           /api/v1/form                 controllers.DataCollectionAPI.getForms()
+POST          /api/v1/form                 controllers.DataCollectionAPI.createForm()
+GET           /api/v1/formcount            controllers.DataCollectionAPI.getFormsCount()
+
+DELETE        /api/v1/fieldvalue/:id       controllers.DataCollectionAPI.deleteFieldOption(id: Integer)
 
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file            controllers.Assets.at(path="/public", file)
+GET           /assets/*file                controllers.Assets.at(path="/public", file)
 
 # Routiong for other request
-GET           /*any                    controllers.Application.main(any)
+GET           /*any                        controllers.Application.main(any)

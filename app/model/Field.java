@@ -2,11 +2,11 @@ package model;
 
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 @Entity(name = "field")
-@SequenceGenerator(name = "field_generator", sequenceName = "field_field_id_seq", allocationSize = 1, initialValue = 1)
+@SequenceGenerator(name = "field_generator", sequenceName = "field_id_seq", allocationSize = 1, initialValue = 1)
 public class Field {
 
     private int id;
@@ -14,7 +14,7 @@ public class Field {
     private String type;
     private Boolean required;
     private Boolean isActive;
-    private Set<FieldValue> fieldValues;
+    private List<FieldValue> fieldValues;
 
     public Field() {
 
@@ -27,7 +27,7 @@ public class Field {
         this.isActive = isActive;
     }
 
-    public Field(String label, String type, Boolean required, Boolean isActive, Set<FieldValue> fieldValues) {
+    public Field(String label, String type, Boolean required, Boolean isActive, List<FieldValue> fieldValues) {
         this.label = label;
         this.type = type;
         this.required = required;
@@ -36,7 +36,7 @@ public class Field {
     }
 
     @Id
-    @Column(name = "field_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "field_generator")
     public int getId() {
         return id;
@@ -86,39 +86,15 @@ public class Field {
         this.isActive = isActive;
     }
 
-    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
-    public Set<FieldValue> getFieldValues() {
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "field_field_value",
+            joinColumns = @JoinColumn(name = "field_id"),
+            inverseJoinColumns = @JoinColumn(name = "field_value_id"))
+    public List<FieldValue> getFieldValues() {
         return fieldValues;
     }
 
-    public void setFieldValues(Set<FieldValue> fieldValues) {
+    public void setFieldValues(List<FieldValue> fieldValues) {
         this.fieldValues = fieldValues;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Field field = (Field) o;
-
-        if (id != field.id) return false;
-        if (isActive != null ? !isActive.equals(field.isActive) : field.isActive != null) return false;
-        if (label != null ? !label.equals(field.label) : field.label != null) return false;
-        if (required != null ? !required.equals(field.required) : field.required != null) return false;
-        if (type != null ? !type.equals(field.type) : field.type != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (label != null ? label.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (required != null ? required.hashCode() : 0);
-        result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
-        return result;
     }
 }

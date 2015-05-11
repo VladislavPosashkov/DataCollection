@@ -1,0 +1,36 @@
+@()
+
+@template() {
+
+    <div class="row">
+
+        <div class="col-md-11">
+            <form data-ng-submit="submit()">
+                <div class="form-group" data-ng-repeat="field in fields">
+                    <label for="formComponent">{{field.label}}*:</label>
+                    <input type="text" id="formComponent" class="form-control" data-custom-text-save data-ng-model="text" data-ng-if="field.type == 'SingleLineText' && field.isActive == true">
+                    <textarea class="form-control" id="formComponent" rows="3" data-custom-text-save data-ng-model="text" data-ng-if="field.type == 'Textarea' && field.isActive == true"></textarea>
+                    <div class="radio" id="formComponent" data-ng-repeat="value in field.fieldValues" data-ng-if="field.type == 'RadioButton' && field.isActive == true">
+                        <label>
+                            <input type="radio" name="field.id" data-ng-value="{'field':{'id':field.id}, 'answer':{'id':value.id}}" data-ng-model="radioValue" data-ng-click="updateRadio(radioValue)">
+                            {{value.value}}
+                        </label>
+                    </div>
+                    <div class="checkbox" id="formComponent" data-ng-repeat="value in field.fieldValues" data-ng-if="field.type == 'CheckBox' && field.isActive == true">
+                        <label>
+                            <input type="checkbox" data-ng-checked="isSelected(value.id)" data-ng-click="updateCheckbox($event, field.id, value.id)">
+                            {{value.value}}
+                        </label>
+                    </div>
+                    <select class="form-control" id="formComponent" data-custom-select-save data-ng-model="selectedItem" data-ng-if="field.type == 'Combobox' && field.isActive == true">
+                        <option ng-repeat="item in field.fieldValues" value="{{item.id}}">{{item.value}}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="reset" class="btn btn-default" data-ng-click="reset()">Reset</button>
+            </form>
+        </div>
+
+    </div>
+
+}
